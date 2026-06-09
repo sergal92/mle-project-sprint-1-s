@@ -1,0 +1,30 @@
+[2026-06-07T17:07:58.242+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: prepare_buildings_flats_dataset.extract manual__2026-06-07T17:07:31.876858+00:00 [queued]>
+[2026-06-07T17:07:58.393+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: prepare_buildings_flats_dataset.extract manual__2026-06-07T17:07:31.876858+00:00 [queued]>
+[2026-06-07T17:07:58.424+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2026-06-07T17:07:58.657+0000] {taskinstance.py:1382} INFO - Executing <Task(_PythonDecoratedOperator): extract> on 2026-06-07 17:07:31.876858+00:00
+[2026-06-07T17:07:58.720+0000] {standard_task_runner.py:57} INFO - Started process 88 to run task
+[2026-06-07T17:07:58.831+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'prepare_buildings_flats_dataset', 'extract', 'manual__2026-06-07T17:07:31.876858+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/data_prep.py', '--cfg-path', '/tmp/tmpewshu0my']
+[2026-06-07T17:07:58.862+0000] {standard_task_runner.py:85} INFO - Job 8: Subtask extract
+[2026-06-07T17:07:59.617+0000] {task_command.py:416} INFO - Running <TaskInstance: prepare_buildings_flats_dataset.extract manual__2026-06-07T17:07:31.876858+00:00 [running]> on host 163e5cb8f82e
+[2026-06-07T17:08:00.725+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='prepare_buildings_flats_dataset' AIRFLOW_CTX_TASK_ID='extract' AIRFLOW_CTX_EXECUTION_DATE='2026-06-07T17:07:31.876858+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-06-07T17:07:31.876858+00:00'
+[2026-06-07T17:08:00.956+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/decorators/base.py", line 221, in execute
+    return_value = super().execute(context)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_prep.py", line 63, in extract
+    conn = hook.get_conn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/postgres/hooks/postgres.py", line 125, in get_conn
+    conn = deepcopy(self.connection or self.get_connection(conn_id))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/hooks/base.py", line 72, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/connection.py", line 477, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `source_db` isn't defined
+[2026-06-07T17:08:01.030+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=prepare_buildings_flats_dataset, task_id=extract, execution_date=20260607T170731, start_date=20260607T170758, end_date=20260607T170801
+[2026-06-07T17:08:01.267+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 8 for task extract (The conn_id `source_db` isn't defined; 88)
+[2026-06-07T17:08:01.500+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2026-06-07T17:08:01.775+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

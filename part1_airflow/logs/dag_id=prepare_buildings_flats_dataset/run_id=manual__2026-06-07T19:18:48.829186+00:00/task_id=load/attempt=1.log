@@ -1,0 +1,29 @@
+[2026-06-07T19:19:13.707+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: prepare_buildings_flats_dataset.load manual__2026-06-07T19:18:48.829186+00:00 [queued]>
+[2026-06-07T19:19:13.732+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: prepare_buildings_flats_dataset.load manual__2026-06-07T19:18:48.829186+00:00 [queued]>
+[2026-06-07T19:19:13.732+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2026-06-07T19:19:13.759+0000] {taskinstance.py:1382} INFO - Executing <Task(_PythonDecoratedOperator): load> on 2026-06-07 19:18:48.829186+00:00
+[2026-06-07T19:19:13.772+0000] {standard_task_runner.py:57} INFO - Started process 97 to run task
+[2026-06-07T19:19:13.788+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'prepare_buildings_flats_dataset', 'load', 'manual__2026-06-07T19:18:48.829186+00:00', '--job-id', '29', '--raw', '--subdir', 'DAGS_FOLDER/data_prep.py', '--cfg-path', '/tmp/tmpuv1v0tk2']
+[2026-06-07T19:19:13.790+0000] {standard_task_runner.py:85} INFO - Job 29: Subtask load
+[2026-06-07T19:19:13.964+0000] {task_command.py:416} INFO - Running <TaskInstance: prepare_buildings_flats_dataset.load manual__2026-06-07T19:18:48.829186+00:00 [running]> on host 0cb2444bb29f
+[2026-06-07T19:19:15.219+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='prepare_buildings_flats_dataset' AIRFLOW_CTX_TASK_ID='load' AIRFLOW_CTX_EXECUTION_DATE='2026-06-07T19:18:48.829186+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-06-07T19:18:48.829186+00:00'
+[2026-06-07T19:19:16.572+0000] {base.py:73} INFO - Using connection ID 'destination_db' for task execution.
+[2026-06-07T19:19:16.592+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/decorators/base.py", line 221, in execute
+    return_value = super().execute(context)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_prep.py", line 99, in load
+    hook.insert_rows(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/common/sql/hooks/sql.py", line 507, in insert_rows
+    sql = self._generate_insert_sql(table, values, target_fields, replace, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/postgres/hooks/postgres.py", line 308, in _generate_insert_sql
+    raise ValueError("PostgreSQL ON CONFLICT upsert syntax requires an unique index")
+ValueError: PostgreSQL ON CONFLICT upsert syntax requires an unique index
+[2026-06-07T19:19:16.651+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=prepare_buildings_flats_dataset, task_id=load, execution_date=20260607T191848, start_date=20260607T191913, end_date=20260607T191916
+[2026-06-07T19:19:16.723+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 29 for task load (PostgreSQL ON CONFLICT upsert syntax requires an unique index; 97)
+[2026-06-07T19:19:16.820+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2026-06-07T19:19:16.898+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
