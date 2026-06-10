@@ -1,0 +1,121 @@
+[2026-06-09T10:25:11.554+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: clean_buildings_flats_dataset.create_table manual__2026-06-09T10:25:00.762330+00:00 [queued]>
+[2026-06-09T10:25:11.572+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: clean_buildings_flats_dataset.create_table manual__2026-06-09T10:25:00.762330+00:00 [queued]>
+[2026-06-09T10:25:11.572+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2026-06-09T10:25:11.605+0000] {taskinstance.py:1382} INFO - Executing <Task(_PythonDecoratedOperator): create_table> on 2026-06-09 10:25:00.762330+00:00
+[2026-06-09T10:25:11.615+0000] {standard_task_runner.py:57} INFO - Started process 74 to run task
+[2026-06-09T10:25:11.625+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'clean_buildings_flats_dataset', 'create_table', 'manual__2026-06-09T10:25:00.762330+00:00', '--job-id', '68', '--raw', '--subdir', 'DAGS_FOLDER/clean_data.py', '--cfg-path', '/tmp/tmp79r455uj']
+[2026-06-09T10:25:11.627+0000] {standard_task_runner.py:85} INFO - Job 68: Subtask create_table
+[2026-06-09T10:25:11.717+0000] {task_command.py:416} INFO - Running <TaskInstance: clean_buildings_flats_dataset.create_table manual__2026-06-09T10:25:00.762330+00:00 [running]> on host 8b4f92aa28b1
+[2026-06-09T10:25:11.898+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='clean_buildings_flats_dataset' AIRFLOW_CTX_TASK_ID='create_table' AIRFLOW_CTX_EXECUTION_DATE='2026-06-09T10:25:00.762330+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-06-09T10:25:00.762330+00:00'
+[2026-06-09T10:25:11.941+0000] {base.py:73} INFO - Using connection ID 'destination_db' for task execution.
+[2026-06-09T10:25:12.089+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateTable: relation "unique_building_flat" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/decorators/base.py", line 221, in execute
+    return_value = super().execute(context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/clean_data.py", line 49, in create_table
+    metadata.create_all(db_engine)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4930, in create_all
+    bind._run_ddl_visitor(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3238, in _run_ddl_visitor
+    conn._run_ddl_visitor(visitorcallable, element, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2221, in _run_ddl_visitor
+    visitorcallable(self.dialect, self, **kwargs).traverse_single(element)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/sql/visitors.py", line 524, in traverse_single
+    return meth(obj, **kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/sql/ddl.py", line 855, in visit_metadata
+    self.traverse_single(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/sql/visitors.py", line 524, in traverse_single
+    return meth(obj, **kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/sql/ddl.py", line 899, in visit_table
+    self.connection.execute(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/sql/ddl.py", line 80, in _execute_on_connection
+    return connection._execute_ddl(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1477, in _execute_ddl
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateTable) relation "unique_building_flat" already exists
+
+[SQL: 
+CREATE TABLE buildings_flats_cleaned (
+	id SERIAL NOT NULL, 
+	building_id INTEGER NOT NULL, 
+	build_year INTEGER, 
+	building_type_int INTEGER, 
+	latitude FLOAT, 
+	longitude FLOAT, 
+	ceiling_height FLOAT, 
+	flats_count INTEGER, 
+	floors_total INTEGER, 
+	has_elevator VARCHAR, 
+	flat_id INTEGER NOT NULL, 
+	floor INTEGER, 
+	kitchen_area FLOAT, 
+	living_area FLOAT, 
+	rooms INTEGER, 
+	is_apartment VARCHAR, 
+	studio VARCHAR, 
+	total_area FLOAT, 
+	price FLOAT, 
+	PRIMARY KEY (id), 
+	CONSTRAINT unique_building_flat UNIQUE (building_id, flat_id)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2026-06-09T10:25:12.130+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=clean_buildings_flats_dataset, task_id=create_table, execution_date=20260609T102500, start_date=20260609T102511, end_date=20260609T102512
+[2026-06-09T10:25:12.221+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 68 for task create_table ((psycopg2.errors.DuplicateTable) relation "unique_building_flat" already exists
+
+[SQL: 
+CREATE TABLE buildings_flats_cleaned (
+	id SERIAL NOT NULL, 
+	building_id INTEGER NOT NULL, 
+	build_year INTEGER, 
+	building_type_int INTEGER, 
+	latitude FLOAT, 
+	longitude FLOAT, 
+	ceiling_height FLOAT, 
+	flats_count INTEGER, 
+	floors_total INTEGER, 
+	has_elevator VARCHAR, 
+	flat_id INTEGER NOT NULL, 
+	floor INTEGER, 
+	kitchen_area FLOAT, 
+	living_area FLOAT, 
+	rooms INTEGER, 
+	is_apartment VARCHAR, 
+	studio VARCHAR, 
+	total_area FLOAT, 
+	price FLOAT, 
+	PRIMARY KEY (id), 
+	CONSTRAINT unique_building_flat UNIQUE (building_id, flat_id)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/14/f405); 74)
+[2026-06-09T10:25:12.305+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2026-06-09T10:25:12.455+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

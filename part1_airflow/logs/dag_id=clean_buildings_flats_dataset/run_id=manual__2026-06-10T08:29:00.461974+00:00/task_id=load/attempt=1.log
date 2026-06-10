@@ -1,0 +1,30 @@
+[2026-06-10T08:29:24.796+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: clean_buildings_flats_dataset.load manual__2026-06-10T08:29:00.461974+00:00 [queued]>
+[2026-06-10T08:29:24.822+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: clean_buildings_flats_dataset.load manual__2026-06-10T08:29:00.461974+00:00 [queued]>
+[2026-06-10T08:29:24.822+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2026-06-10T08:29:24.853+0000] {taskinstance.py:1382} INFO - Executing <Task(_PythonDecoratedOperator): load> on 2026-06-10 08:29:00.461974+00:00
+[2026-06-10T08:29:24.870+0000] {standard_task_runner.py:57} INFO - Started process 95 to run task
+[2026-06-10T08:29:24.884+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'clean_buildings_flats_dataset', 'load', 'manual__2026-06-10T08:29:00.461974+00:00', '--job-id', '27', '--raw', '--subdir', 'DAGS_FOLDER/clean_data.py', '--cfg-path', '/tmp/tmp50qpnroe']
+[2026-06-10T08:29:24.886+0000] {standard_task_runner.py:85} INFO - Job 27: Subtask load
+[2026-06-10T08:29:25.014+0000] {task_command.py:416} INFO - Running <TaskInstance: clean_buildings_flats_dataset.load manual__2026-06-10T08:29:00.461974+00:00 [running]> on host f949d1447d52
+[2026-06-10T08:29:25.811+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='clean_buildings_flats_dataset' AIRFLOW_CTX_TASK_ID='load' AIRFLOW_CTX_EXECUTION_DATE='2026-06-10T08:29:00.461974+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-06-10T08:29:00.461974+00:00'
+[2026-06-10T08:29:25.826+0000] {base.py:73} INFO - Using connection ID 'destination_db' for task execution.
+[2026-06-10T08:29:26.459+0000] {base.py:73} INFO - Using connection ID 'destination_db' for task execution.
+[2026-06-10T08:29:26.478+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/decorators/base.py", line 221, in execute
+    return_value = super().execute(context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/clean_data.py", line 105, in load
+    hook.insert_rows(
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/common/sql/hooks/sql.py", line 524, in insert_rows
+    cur.execute(sql, values)
+psycopg2.errors.InvalidColumnReference: there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+[2026-06-10T08:29:26.495+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=clean_buildings_flats_dataset, task_id=load, execution_date=20260610T082900, start_date=20260610T082924, end_date=20260610T082926
+[2026-06-10T08:29:26.529+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 27 for task load (there is no unique or exclusion constraint matching the ON CONFLICT specification
+; 95)
+[2026-06-10T08:29:26.621+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2026-06-10T08:29:26.656+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

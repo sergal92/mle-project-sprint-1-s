@@ -1,0 +1,33 @@
+[2026-06-09T10:46:25.490+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: clean_buildings_flats_dataset.extract manual__2026-06-09T10:46:19.854750+00:00 [queued]>
+[2026-06-09T10:46:25.524+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: clean_buildings_flats_dataset.extract manual__2026-06-09T10:46:19.854750+00:00 [queued]>
+[2026-06-09T10:46:25.525+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2026-06-09T10:46:25.552+0000] {taskinstance.py:1382} INFO - Executing <Task(_PythonDecoratedOperator): extract> on 2026-06-09 10:46:19.854750+00:00
+[2026-06-09T10:46:25.564+0000] {standard_task_runner.py:57} INFO - Started process 193 to run task
+[2026-06-09T10:46:25.585+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'clean_buildings_flats_dataset', 'extract', 'manual__2026-06-09T10:46:19.854750+00:00', '--job-id', '74', '--raw', '--subdir', 'DAGS_FOLDER/clean_data.py', '--cfg-path', '/tmp/tmp31wxi_py']
+[2026-06-09T10:46:25.587+0000] {standard_task_runner.py:85} INFO - Job 74: Subtask extract
+[2026-06-09T10:46:25.716+0000] {task_command.py:416} INFO - Running <TaskInstance: clean_buildings_flats_dataset.extract manual__2026-06-09T10:46:19.854750+00:00 [running]> on host cae6c763b690
+[2026-06-09T10:46:25.939+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='clean_buildings_flats_dataset' AIRFLOW_CTX_TASK_ID='extract' AIRFLOW_CTX_EXECUTION_DATE='2026-06-09T10:46:19.854750+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-06-09T10:46:19.854750+00:00'
+[2026-06-09T10:46:25.958+0000] {base.py:73} INFO - Using connection ID 'destination_db' for task execution.
+[2026-06-09T10:46:26.031+0000] {warnings.py:109} WARNING - /opt/***/dags/clean_data.py:62: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  data = pd.read_sql(sql, conn).drop(columns=['id'])
+
+[2026-06-09T10:46:28.093+0000] {python.py:194} INFO - Done. Returned value was:         building_id  build_year  ...  total_area       price
+0              2708        1959  ...   71.400002  15500000.0
+1              6454        1966  ...   29.700001   7390000.0
+2             10331        1973  ...   62.900002  13900000.0
+3             22421        2013  ...  111.699997  23000000.0
+4             22421        2013  ...   56.700001  13500000.0
+...             ...         ...  ...         ...         ...
+141357        18633        2002  ...   74.000000  15000000.0
+141358        13988        1983  ...   36.099998   6900000.0
+141359        11566        1976  ...   48.000000   9000000.0
+141360        14663        1986  ...   36.900002   7500000.0
+141361        20344        2006  ...   39.939999   8900000.0
+
+[141362 rows x 18 columns]
+[2026-06-09T10:46:28.305+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.10/site-packages/pyarrow/pandas_compat.py:373: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if _pandas_api.is_sparse(col):
+
+[2026-06-09T10:46:29.954+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=clean_buildings_flats_dataset, task_id=extract, execution_date=20260609T104619, start_date=20260609T104625, end_date=20260609T104629
+[2026-06-09T10:46:30.015+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2026-06-09T10:46:30.046+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
