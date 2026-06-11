@@ -1,0 +1,74 @@
+schema: '2.0'
+stages:
+  get_data:
+    cmd: python scripts/data.py
+    deps:
+    - path: scripts/data.py
+      hash: md5
+      md5: 38a3205479e718b5caf1659de92af3c0
+      size: 1502
+    params:
+      params.yaml:
+        index_col:
+        - id
+        - building_id
+        - flat_id
+    outs:
+    - path: data/initial_data.csv
+      hash: md5
+      md5: 62ac9ce3b4fc5506a1569f4769c0d776
+      size: 13307230
+  fit_model:
+    cmd: python scripts/fit.py
+    deps:
+    - path: data/initial_data.csv
+      hash: md5
+      md5: 62ac9ce3b4fc5506a1569f4769c0d776
+      size: 13307230
+    - path: scripts/fit.py
+      hash: md5
+      md5: 31bcc494a2f914752883ec8c92f4d791
+      size: 2381
+    params:
+      params.yaml:
+        auto_class_weights: Balanced
+        index_col:
+        - id
+        - building_id
+        - flat_id
+        one_hot_drop: if_binary
+        target_col: price
+    outs:
+    - path: models/fitted_model.pkl
+      hash: md5
+      md5: b22cfbe8b27cfbbf1881491903c38331
+      size: 3529
+  evaluate_model:
+    cmd: python scripts/evaluate.py
+    deps:
+    - path: models/fitted_model.pkl
+      hash: md5
+      md5: b22cfbe8b27cfbbf1881491903c38331
+      size: 3529
+    - path: scripts/evaluate.py
+      hash: md5
+      md5: 2baf58b000fa372bc78f94bbbc81f6b3
+      size: 1404
+    params:
+      params.yaml:
+        auto_class_weights: Balanced
+        index_col:
+        - id
+        - building_id
+        - flat_id
+        metrics:
+        - r2
+        n_jobs: -1
+        n_splits: 5
+        one_hot_drop: if_binary
+        target_col: price
+    outs:
+    - path: cv_results/cv_res.json
+      hash: md5
+      md5: d66ad128be138fba9476eed5ae6627e1
+      size: 71

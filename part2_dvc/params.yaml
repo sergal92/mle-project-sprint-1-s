@@ -1,0 +1,8 @@
+# params.yaml
+index_col: ['id', 'building_id', 'flat_id']
+target_col: 'price'
+one_hot_drop: 'if_binary'
+auto_class_weights: 'Balanced'
+n_splits: 5
+metrics: ['r2']
+n_jobs: -1
